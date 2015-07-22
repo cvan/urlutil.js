@@ -16,12 +16,31 @@ function exportType(moduleType, prefix) {
     .pipe(gulp.dest('dist'));
 }
 
+/**
+ * Export to AMD modules.
+ */
 gulp.task('babel-amd', function() {
   return exportType('amd');
 });
 
+/**
+ * Export to CommonJS modules.
+ */
 gulp.task('babel-common', function() {
   return exportType('common', 'node-');
+});
+
+/**
+ * Specialized export task for JSCore (Apple) implementations.
+ * Polyfills the URL and other needed objects.
+ */
+gulp.task('jscore', function() {
+  return gulp.src([
+      'src/url-polyfill.js',
+      'src/urlutil.js'
+    ])
+    .pipe(concat('jscore-urlutil.js'))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('docs', function() {
@@ -34,4 +53,4 @@ gulp.task('docs', function() {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('default', ['babel-amd', 'babel-common', 'docs']);
+gulp.task('default', ['babel-amd', 'babel-common', 'jscore', 'docs']);

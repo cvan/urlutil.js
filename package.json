@@ -1,0 +1,30 @@
+{
+  "name": "url-util",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kevingrandon/url-util.git"
+  },
+  "author": "Kevin Grandon <kevingrandon@yahoo.com>",
+  "licenses": [
+    {
+      "type": "MPL",
+      "version": "2.0",
+      "url": "http://mozilla.org/MPL/2.0/"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/kevingrandon/url-util/issues"
+  },
+  "engines": {
+    "node": "0.12.1"
+  },
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.6.0",
+    "gulp-jsdoc": "^0.1.4",
+    "gulp-jsdoc-to-markdown": "^1.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.6"
+  }
+}

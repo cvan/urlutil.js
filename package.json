@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kevingrandon/url-util.git"
+    "url": "git://github.com/kevingrandon/urlutil.js.git"
   },
   "author": "Kevin Grandon <kevingrandon@yahoo.com>",
   "licenses": [
@@ -14,7 +14,7 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/kevingrandon/url-util/issues"
+    "url": "https://github.com/kevingrandon/urlutil.js/issues"
   },
   "engines": {
     "node": "0.12.1"

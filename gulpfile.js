@@ -4,13 +4,24 @@ var gutil = require('gulp-util');
 var gulpJsdoc2md = require('gulp-jsdoc-to-markdown');
 var concat = require('gulp-concat');
 var babel = require('gulp-babel'); 
+var rename = require('gulp-rename');
 
-gulp.task('babel-amd', function () {
-  return gulp.src('src/**.js')
+function exportType(moduleType, prefix) {
+  prefix = prefix || '';
+  return gulp.src('src/urlutil.js')
     .pipe(babel({
-      modules: 'amd'
+      modules: moduleType
     }))
+    .pipe(rename(prefix + 'urlutil.js'))
     .pipe(gulp.dest('dist'));
+}
+
+gulp.task('babel-amd', function() {
+  return exportType('amd');
+});
+
+gulp.task('babel-common', function() {
+  return exportType('common', 'node-');
 });
 
 gulp.task('docs', function() {
@@ -23,4 +34,4 @@ gulp.task('docs', function() {
     .pipe(gulp.dest('.'));
 });
 
-gulp.task('default', ['babel-amd', 'docs']);
+gulp.task('default', ['babel-amd', 'babel-common', 'docs']);

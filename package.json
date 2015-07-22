@@ -1,10 +1,11 @@
 {
   "name": "urlutil.js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": {
     "type": "git",
     "url": "git://github.com/kevingrandon/urlutil.js.git"
   },
+  "main": "./src/urlutil.js",
   "author": "Kevin Grandon <kevingrandon@yahoo.com>",
   "licenses": [
     {

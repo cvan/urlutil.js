@@ -3,8 +3,17 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var gulpJsdoc2md = require('gulp-jsdoc-to-markdown');
 var concat = require('gulp-concat');
- 
-gulp.task('default', function() {
+var babel = require('gulp-babel'); 
+
+gulp.task('babel-amd', function () {
+  return gulp.src('src/**.js')
+    .pipe(babel({
+      modules: 'amd'
+    }))
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('docs', function() {
   return gulp.src('src/**.js')
     .pipe(concat('README.md'))
     .pipe(gulpJsdoc2md({ template: fs.readFileSync('./readme.hbs', 'utf8') }))
@@ -13,3 +22,5 @@ gulp.task('default', function() {
     })
     .pipe(gulp.dest('.'));
 });
+
+gulp.task('default', ['babel-amd', 'docs']);

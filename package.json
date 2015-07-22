@@ -19,8 +19,9 @@
   "engines": {
     "node": "0.12.1"
   },
-  "dependencies": {
+  "devDependencies": {
     "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-jsdoc": "^0.1.4",
     "gulp-jsdoc-to-markdown": "^1.1.1",

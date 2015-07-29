@@ -159,11 +159,11 @@ export default class UrlUtil {
   }
 
   /**
-   * Extracts the hostname or returns undefined
+   * Extracts the host (hostname + port) or returns undefined.
    * @param {String} input The input url.
    * @returns {String} The host name.
    */
-  static getHostname(input) {
+  static getHost(input) {
     try {
       return new URL(input).host;
     } catch (e) {

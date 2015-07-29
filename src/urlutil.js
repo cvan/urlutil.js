@@ -21,7 +21,7 @@ export default class UrlUtil {
    * @returns {String} The found scheme.
    */
   static getScheme(input) {
-    // This function returns one of followings
+    // This function returns one of following:
     // - scheme + ':' (ex. http:)
     // - scheme + '://' (ex. http://)
     // - null
@@ -43,11 +43,6 @@ export default class UrlUtil {
    * @returns {Boolean} Returns true if this is not a valid url.
    */
   static isNotURL(input) {
-    // in bug 904731, we use <input type='url' value=''> to
-    // validate url. However, there're still some cases
-    // need extra validation. We'll remove it til bug fixed
-    // for native form validation.
-    //
     // for cases, ?abc and "a? b" which should searching query
     var case1Reg = /^(\?)|(\?.+\s)/;
     // for cases, pure string
@@ -63,8 +58,9 @@ export default class UrlUtil {
     if (case3Reg.test(str)) {
       return false;
     }
-    // require basic scheme before form validation
+
     if (!this.hasScheme(str)) {
+      // No scheme? Prepend to test as an HTTP URL below.
       str = defaultScheme + str;
     }
 

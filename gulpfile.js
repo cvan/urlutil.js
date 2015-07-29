@@ -1,9 +1,12 @@
 var fs = require('fs');
-var gulp = require('gulp');
-var gutil = require('gulp-util');
-var gulpJsdoc2md = require('gulp-jsdoc-to-markdown');
+
+var babel = require('gulp-babel');
+var babelify = require('babelify');
+var browserify = require('browserify');
 var concat = require('gulp-concat');
-var babel = require('gulp-babel'); 
+var gulp = require('gulp');
+var gulpJsdoc2md = require('gulp-jsdoc-to-markdown');
+var gutil = require('gulp-util');
 var rename = require('gulp-rename');
 
 function exportType(moduleType, prefix) {
@@ -30,6 +33,7 @@ gulp.task('babel-common', function() {
   return exportType('common', 'node-');
 });
 
+
 /**
  * Specialized export task for JSCore (Apple) implementations.
  * Polyfills the URL and other needed objects.
@@ -41,6 +45,24 @@ gulp.task('jscore', function() {
     ])
     .pipe(concat('jscore-urlutil.js'))
     .pipe(gulp.dest('dist'));
+});
+
+gulp.task('jscore-transpiled', function(cb) {
+  return browserify({
+      entries: [
+        'src/url-polyfill.js',
+        'src/urlutil.js'
+      ]
+    })
+    .transform(babelify.configure({}))
+    .bundle()
+    .on('error', function (err) {
+      console.error('[jscore-transpiled] Error occurred:\n', err.stack);
+
+      // But don't error out the stream.
+      cb();
+    })
+    .pipe(fs.createWriteStream('dist/jscore-urlutil-transpiled.js'));
 });
 
 gulp.task('docs', function() {
